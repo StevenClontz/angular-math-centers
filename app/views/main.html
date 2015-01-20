@@ -25,6 +25,7 @@
            class="form-control"
            id="sessionLength"
            placeholder="720000"
+           ng-change="MainCtrl.timer.reset()"
            ng-model="MainCtrl.timer.state.active.length">
   </div>
   <div class="form-group">
@@ -34,6 +35,7 @@
            id="sessionYouTubeId"
            placeholder="dwH1daa8NY8"
            max-length="15"
+           ng-change="MainCtrl.timer.reset()"
            ng-model="MainCtrl.timer.state.active.youTubeId">
   </div>
   <div class="form-group">
@@ -42,6 +44,7 @@
            class="form-control"
            id="sessionBreakLength"
            placeholder="60000"
+           ng-change="MainCtrl.timer.reset()"
            ng-model="MainCtrl.timer.state.between.length">
   </div>
   <div class="form-group">
@@ -51,6 +54,7 @@
            id="breakYouTubeId"
            placeholder="dwH1daa8NY8"
            max-length="15"
+           ng-change="MainCtrl.timer.reset()"
            ng-model="MainCtrl.timer.state.between.youTubeId">
   </div>
 </form>

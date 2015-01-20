@@ -48,7 +48,7 @@ angular.module('angularMathCentersApp')
       },
       reset: function () {
         this.currentState = 'active';
-        this.timeRemaining = this.state.active;
+        this.timeRemaining = this.state.active.length;
       },
       increment: function () {
         this.timeRemaining = this.timeRemaining - 1;
