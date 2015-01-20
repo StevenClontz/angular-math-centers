@@ -1,31 +1,56 @@
 <div class="jumbotron">
   <h1>Math Center Timer</h1>
+  <p class="lead">
+    <span>{{MainCtrl.timer.timeRemaining}}</span>
+  </p>
+  <youtube-video ng-if="MainCtrl.timer.currentState == 'between' && MainCtrl.timer.state.between.youTubeId"
+                 video-id="MainCtrl.timer.state.between.youTubeId"
+                 player-width="'300px'"
+                 player-height="'200px'"
+                 player-vars="{controls:0,autoplay:1}">
+  </youtube-video>
+  <youtube-video ng-if="MainCtrl.timer.currentState == 'active' && MainCtrl.timer.state.active.youTubeId"
+                 video-id="MainCtrl.timer.state.active.youTubeId"
+                 player-width="'300px'"
+                 player-height="'200px'"
+                 player-vars="{controls:0,autoplay:1}">
+  </youtube-video>
 </div>
+
 
 <form>
   <div class="form-group">
-    <label for="sessionLength">Length of Session (in minutes)</label>
+    <label for="sessionLength">Length of Session (in seconds)</label>
     <input type="number"
            class="form-control"
            id="sessionLength"
-           placeholder="12"
-           ng-model="MainCtrl.session.length">
+           placeholder="720000"
+           ng-model="MainCtrl.timer.state.active.length">
   </div>
   <div class="form-group">
-    <label for="sessionBreakLength">Length of Break (in minutes)</label>
+    <label for="sessionYouTubeId">YouTube ID for session music (after the `?v=` in the URL)</label>
+    <input type="text"
+           class="form-control"
+           id="sessionYouTubeId"
+           placeholder="dwH1daa8NY8"
+           max-length="15"
+           ng-model="MainCtrl.timer.state.active.youTubeId">
+  </div>
+  <div class="form-group">
+    <label for="sessionBreakLength">Length of Break (in seconds)</label>
     <input type="number"
            class="form-control"
            id="sessionBreakLength"
-           placeholder="1"
-           ng-model="MainCtrl.session.breakLength">
+           placeholder="60000"
+           ng-model="MainCtrl.timer.state.between.length">
   </div>
   <div class="form-group">
-    <label for="sessionBreakYouTubeId">YouTube ID for break music (after the `?v=` in the URL)</label>
+    <label for="breakYouTubeId">YouTube ID for break music (after the `?v=` in the URL)</label>
     <input type="text"
            class="form-control"
-           id="sessionBreakYoutubeId"
+           id="breakYouTubeId"
            placeholder="dwH1daa8NY8"
            max-length="15"
-           ng-model="MainCtrl.session.breakYouTubeId">
+           ng-model="MainCtrl.timer.state.between.youTubeId">
   </div>
 </form>

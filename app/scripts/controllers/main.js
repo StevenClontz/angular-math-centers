@@ -8,10 +8,53 @@
  * Controller of the angularMathCentersApp
  */
 angular.module('angularMathCentersApp')
-  .controller('MainCtrl', function () {
-    this.session = {
-      length: 12,
-      breakLength: 1,
-      breakYouTubeId: 'dwH1daa8NY8'
+  .controller('MainCtrl', function ($scope, $interval) {
+
+    var ctrl = this;
+
+    // Loop all videos
+    $scope.$on('youtube.player.ended', function ($event, player) {
+      player.playVideo();
+    });
+
+    var initialActiveLength = 720;
+    var initialBetweenLength = 60;
+
+    // Timer
+    ctrl.timer = {
+      currentState: 'active',
+      timeRemaining: initialActiveLength,
+      state: {
+        active: {
+          length: initialActiveLength,
+          youTubeId: ''
+        },
+        between: {
+          length: initialBetweenLength,
+          youTubeId: 'dwH1daa8NY8'
+        }
+      },
+      reset: function () {
+        this.currentState = 'active';
+        this.timeRemaining = this.state.active;
+      },
+      increment: function () {
+        this.timeRemaining = this.timeRemaining - 1;
+        if (this.timeRemaining === 0) {
+          switch (this.currentState) {
+            case 'active':
+              this.currentState = 'between';
+              this.timeRemaining = this.state.between.length;
+            break;
+            case 'between':
+              this.currentState = 'active';
+              this.timeRemaining = this.state.active.length;
+            break;
+          }
+        }
+      }
     };
+
+    $interval(function(){ctrl.timer.increment();}, 1000);
+
   });
