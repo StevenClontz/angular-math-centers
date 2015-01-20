@@ -24,6 +24,18 @@ angular.module('angularMathCentersApp')
     ctrl.timer = {
       currentState: 'active',
       timeRemaining: initialActiveLength,
+      displayTimeRemaining: function () {
+        var seconds, minutes, displaySeconds, displayMinutes;
+        seconds = this.timeRemaining % 60;
+        minutes = Math.floor(this.timeRemaining / 60);
+        if (seconds < 10) {
+          displaySeconds = '0' + String(seconds);
+        } else {
+          displaySeconds = String(seconds);
+        }
+        displayMinutes = String(minutes);
+        return displayMinutes + ':' + displaySeconds;
+      },
       state: {
         active: {
           length: initialActiveLength,

@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <h1>Math Center Timer</h1>
   <p class="lead">
-    <span>{{MainCtrl.timer.timeRemaining}}</span>
+    <span>{{MainCtrl.timer.displayTimeRemaining()}}</span>
   </p>
   <youtube-video ng-if="MainCtrl.timer.currentState == 'between' && MainCtrl.timer.state.between.youTubeId"
                  video-id="MainCtrl.timer.state.between.youTubeId"
